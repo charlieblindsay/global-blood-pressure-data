@@ -14,7 +14,7 @@ plt.ylabel('Blood pressure')
 countries = list(df.columns[1:-3])
 
 st.title('How does Blood Pressure vary by country?')
-st.write('Find GitHub repository here: https://github.com/charlieblindsay/neural_style_transfer')
+st.write('Find GitHub repository here: https://github.com/charlieblindsay/global-blood-pressure-data')
 st.write('After the user has selected countries, plots showing the average blood pressure of citizens in country over time will be displayed.')
 st.subheader('Country selection')
 
