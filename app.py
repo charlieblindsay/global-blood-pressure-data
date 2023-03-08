@@ -9,7 +9,7 @@ df = pd.read_csv('processed_data.csv')
 plt.figure(figsize=(10,6))
 plt.title("How blood pressure has varied in different countries between 1975 and 2015")
 plt.xlabel('Year')
-plt.ylabel('Blood pressure')
+plt.ylabel('Average blood pressure (age-standardized)')
 
 countries = list(df.columns[1:-3])
 
