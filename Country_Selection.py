@@ -11,7 +11,7 @@ plt.title("How blood pressure has varied in different countries between 1975 and
 plt.xlabel('Year')
 plt.ylabel('Average blood pressure (age-standardized)')
 
-countries = list(df.columns[1:-3])
+countries = list(df.columns[1:-3]) # Choose the first 188 countries so is divisible by 4
 
 st.title('How does Blood Pressure vary by country?')
 st.write('Find GitHub repository here: https://github.com/charlieblindsay/global-blood-pressure-data')
@@ -29,15 +29,4 @@ n,m = countries_array.shape
 for i in range(n):
     for j in range(m):
         cols[j].checkbox(countries_array[i, j], key='dynamic_checkbox_' + countries_array[i, j])
-
-selected_countries = [i.replace('dynamic_checkbox_','') for i in st.session_state.keys() if i.startswith('dynamic_checkbox_') and st.session_state[i]]
-
-lst = [i for i in range(0, 41, 5)]
-plt.xticks(lst)
-
-try:
-    sns.lineplot(data=df[selected_countries])
-    st.pyplot(plt.gcf())
-except TypeError:
-    st.warning('No countries selected')
 
