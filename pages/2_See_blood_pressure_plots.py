@@ -9,6 +9,9 @@ selected_countries = [i.replace('dynamic_checkbox_','') for i in st.session_stat
 
 try:
     fig = sns.lineplot(data=df[selected_countries])
+    plt.title("How blood pressure has varied in different countries between 1975 and 2015")
+    plt.xlabel('Year')
+    plt.ylabel('Blood pressure')
     fig.set_xticklabels(['1970', '1975', '1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015'])
     st.pyplot(plt.gcf())
 except TypeError:

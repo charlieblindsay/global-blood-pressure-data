@@ -15,7 +15,9 @@ countries = list(df.columns[1:-3]) # Choose the first 188 countries so is divisi
 
 st.title('How does Blood Pressure vary by country?')
 st.write('Find GitHub repository here: https://github.com/charlieblindsay/global-blood-pressure-data')
-st.write('After the user has selected countries, the average blood pressure of citizens in each country will be plotted against time.')
+st.subheader('Steps to use this app:')
+st.write('1. Select countries below.')
+st.write('2. Click \'See blood pressure plots\' tab on the left to see how the average blood pressure of citizens in each country has varied against time.')
 st.subheader('Country selection')
 
 num_cols = 4
