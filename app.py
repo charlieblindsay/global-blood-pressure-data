@@ -1,10 +1,9 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
 
-df = pd.read_csv('processed_data.csv')
+df = pd.read_csv('processed_blood_pressure_data.csv')
 
 plt.figure(figsize=(10,6))
 plt.title("How blood pressure has varied in different countries between 1975 and 2015")
