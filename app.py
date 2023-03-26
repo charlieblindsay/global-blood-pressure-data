@@ -1,33 +1,37 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
+import seaborn as sns
+import plotly.express as px
+from utilities.file_paths import processed_data_path
 
-df = pd.read_csv('processed_blood_pressure_data.csv')
+st.title('How have Alcohol consumption and BMI varied in the last 50 years?')
 
-plt.figure(figsize=(10,6))
-plt.title("How blood pressure has varied in different countries between 1975 and 2015")
-plt.xlabel('Year')
-plt.ylabel('Average blood pressure (age-standardized)')
+df_blood_pressure = pd.read_csv(processed_data_path / 'BMI_data.csv')
+df_alcohol = pd.read_csv(processed_data_path / 'alcohol_data.csv')
 
-countries = list(df.columns[1:-3]) # Choose the first 188 countries so is divisible by 4
+countries = list(df_blood_pressure.columns[1:])
 
-st.title('How does Blood Pressure vary by country?')
-st.write('Find GitHub repository here: https://github.com/charlieblindsay/global-blood-pressure-data')
-st.subheader('Steps to use this app:')
-st.write('1. Select countries below.')
-st.write('2. Click \'See blood pressure plots\' tab on the left to see how the average blood pressure of citizens in each country has varied against time.')
-st.subheader('Country selection')
+selected_countries = st.multiselect('Select Countries', countries)
 
-num_cols = 4
-cols = st.columns(num_cols)
+try:
+    selected_data = st.radio('Choose to see BMI or Alcohol consumption data', options=['BMI', 'Alcohol Consumption'], index=0)
 
-num_countries = len(countries)
-num_countries_per_column = int(num_countries / num_cols)
-countries_array = np.array(countries).reshape(num_cols,num_countries_per_column).transpose()
-n,m = countries_array.shape
+    if selected_data == 'BMI':
+        fig = sns.lineplot(data=df_blood_pressure[selected_countries])
+        st.header("How has BMI varied over time?")
+        plt.xlabel('Year')
+        plt.ylabel('BMI')
+        fig.set_xticklabels(['1970', '1975', '1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015'])
+    
+    if selected_data == 'Alcohol Consumption':
+        fig = sns.lineplot(data=df_alcohol[selected_countries])
+        st.header("How has Alcohol Consumption varied over time?")
+        plt.xlabel('Year')
+        plt.ylabel('Alcohol consumption per capita (in litres of pure alcohol per year)')
+        fig.set_xticklabels(['1950', '1960', '1970', '1980', '1990', '2000', '2010', '2020'])
 
-for i in range(n):
-    for j in range(m):
-        cols[j].checkbox(countries_array[i, j], key='dynamic_checkbox_' + countries_array[i, j])
+    st.pyplot(plt.gcf())
 
+except TypeError:
+    st.warning('No countries selected. Click on \'Choose an option\' above to search for them')
