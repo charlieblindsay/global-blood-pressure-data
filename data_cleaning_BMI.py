@@ -22,6 +22,7 @@ countries = df.Country.unique()
 years = df.Year.unique()
 years.sort()
 
-df = change_dataframe_structure(df)
+df = change_dataframe_structure(df=df, column_name='BMI')
+df = df.drop(['Palau', 'Sudan (until 2011)', 'Marshall Islands'], axis=1)
 
 df.to_csv(processed_data_path / 'BMI_data.csv', index=False)

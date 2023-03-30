@@ -29,7 +29,7 @@ df.Alcohol_consumption_per_capita = df.Alcohol_consumption_per_capita.apply(conv
 
 df = df.sort_values(by=['Country', 'Year'])
 
-df = change_dataframe_structure(df)
+df = change_dataframe_structure(df=df, column_name='Alcohol_consumption_per_capita')
 
 df.to_csv(processed_data_path / 'alcohol_data.csv', index=False)
 df_country_codes_who.to_csv(processed_data_path / 'country_codes_who.csv', index=False)
